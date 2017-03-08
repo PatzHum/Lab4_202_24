@@ -19,9 +19,8 @@ public class GameBlock extends ImageView implements Movement {
     int bx,by;
     private int blockLayoutIncrement = 243;     // coordinate pixel constant for moving one block up or down
 
-
-
     public GameBlock(Context myContext, int bx, int by) {
+
         super(myContext);
         this.setImageResource(R.drawable.gameblock);
 
@@ -35,7 +34,6 @@ public class GameBlock extends ImageView implements Movement {
 
         setPixelX(myCoordX);
         setPixelY(myCoordY);
-
     }
 
     @Override

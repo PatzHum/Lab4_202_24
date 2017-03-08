@@ -5,6 +5,8 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.RelativeLayout;
 
+import java.util.LinkedList;
+import java.util.Random;
 import java.util.TimerTask;
 import java.util.Vector;
 
@@ -25,6 +27,8 @@ public class GameLoopTask extends TimerTask implements GestureCallback {
     GestureCallback mainCallBack;
     GameBlock currentBlock;
     Animator animator1;
+    LinkedList<GameBlock> blockList = new LinkedList<>();
+    Random myRandomNum = new Random();
 
 
     public GameLoopTask(Activity myActivity1, RelativeLayout myRL1, Context myContext1, GestureCallback mainCallBack ){       //Constructor for gameloopTask
@@ -61,6 +65,8 @@ public class GameLoopTask extends TimerTask implements GestureCallback {
                 animator1.setTarget(blockLayoutIncrement*3,animator1.contextObject.getPixelY());
                 break;
         }
+
+        createBlock();
     }
 
 
@@ -85,9 +91,10 @@ public class GameLoopTask extends TimerTask implements GestureCallback {
     }
 
     private void createBlock(){
-        GameBlock newBlock = new GameBlock(myContext,0, 0);//Instantiates new block at top left = (0,0), image scaling offset in GameBlock.
+        GameBlock newBlock = new GameBlock(myContext,(myRandomNum.nextInt(3)), (myRandomNum.nextInt(3)));//Instantiates new block at coordinates randomly genorated from 0 to 3, image scaling and pixel calculations offset in GameBlock.
         myRL.addView(newBlock);     //add new block to relative layout
         currentBlock = newBlock;
+        blockList.add(newBlock);
 
 
 

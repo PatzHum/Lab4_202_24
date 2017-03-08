@@ -3,6 +3,8 @@ package lab4.uwaterloo.ca.lab4_202_24;
 import android.content.Context;
 import android.widget.ImageView;
 
+import static android.R.attr.x;
+
 /**
  * Created by Alex on 2017-03-05.
  */
@@ -14,18 +16,25 @@ public class GameBlock extends ImageView implements Movement {
     private float IMAGE_SCALE = 0.5f;       //custom scaling to fit image into background grid **note scaling image does not change coordinate borders
     private int myCoordX;
     private int myCoordY;
+    int bx,by;
+    private int blockLayoutIncrement = 243;     // coordinate pixel constant for moving one block up or down
 
 
 
-    public GameBlock(Context myContext, int coordX, int coordY) {
+    public GameBlock(Context myContext, int bx, int by) {
         super(myContext);
         this.setImageResource(R.drawable.gameblock);
 
         this.setScaleX(IMAGE_SCALE);
         this.setScaleY(IMAGE_SCALE);
+        this.bx=bx;
+        this.by=by;
 
-        setPixelX(coordX);
-        setPixelY(coordY);
+        this.myCoordX = blockLayoutIncrement*bx;
+        this.myCoordY = blockLayoutIncrement*by;
+
+        setPixelX(myCoordX);
+        setPixelY(myCoordY);
 
     }
 

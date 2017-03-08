@@ -16,9 +16,9 @@ public class GameBlock extends ImageView implements Movement {
     private float IMAGE_SCALE = 0.5f;       //custom scaling to fit image into background grid **note scaling image does not change coordinate borders
     private int myCoordX;
     private int myCoordY;
-    int bx,by;
+    public int bx, by;
     private int blockLayoutIncrement = 243;     // coordinate pixel constant for moving one block up or down
-
+    public Animator animator;
     public GameBlock(Context myContext, int bx, int by) {
 
         super(myContext);
@@ -34,6 +34,14 @@ public class GameBlock extends ImageView implements Movement {
 
         setPixelX(myCoordX);
         setPixelY(myCoordY);
+
+        animator = new Animator(this);
+    }
+
+    public void moveTo(int x, int y){
+        this.animator.setTarget(x * blockLayoutIncrement, y * blockLayoutIncrement);
+        this.bx = x;
+        this.by = y;
     }
 
     @Override

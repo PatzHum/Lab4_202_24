@@ -26,7 +26,6 @@ public class GameLoopTask extends TimerTask implements GestureCallback {
     Vector<Animator> animators = new Vector<>();
     GestureCallback mainCallBack;
     GameBlock currentBlock;
-    Animator animator1;
     LinkedList<GameBlock> blockList = new LinkedList<>();
     Random myRandomNum = new Random();
 
@@ -37,8 +36,7 @@ public class GameLoopTask extends TimerTask implements GestureCallback {
         myRL = myRL1;
         this.mainCallBack = mainCallBack;
         createBlock();          //instantiate block
-        animator1 = new Animator(currentBlock);
-        animators.add(animator1);
+        animators.add(currentBlock.animator);
 
     }
     @Override
@@ -52,17 +50,25 @@ public class GameLoopTask extends TimerTask implements GestureCallback {
 
         switch (CurrentDirection){
             case UP:
-                animator1.setTarget(animator1.contextObject.getPixelX(),0);
+                for (GameBlock b : blockList){
+                    b.moveTo(b.bx, 0);
+                }
                 break;
 
             case DOWN:
-                animator1.setTarget(animator1.contextObject.getPixelX(),blockLayoutIncrement*3);
+                for (GameBlock b : blockList){
+                    b.moveTo(b.bx, 3);
+                }
                 break;
             case LEFT:
-                animator1.setTarget(0,animator1.contextObject.getPixelY());
+                for (GameBlock b : blockList){
+                    b.moveTo(0, b.by);
+                }
                 break;
             case RIGHT:
-                animator1.setTarget(blockLayoutIncrement*3,animator1.contextObject.getPixelY());
+                for (GameBlock b : blockList){
+                    b.moveTo(3, b.by);
+                }
                 break;
         }
 
@@ -79,10 +85,9 @@ public class GameLoopTask extends TimerTask implements GestureCallback {
         this.myActivity.runOnUiThread(
                 new Runnable(){
                     public void run(){
-
-                       for (int i = 0; i < animators.size(); i++) {
-                           animators.get(i).tick();
-                       }
+                    for (GameBlock b : blockList){
+                        b.animator.tick();
+                    }
                     }
                 }
         );

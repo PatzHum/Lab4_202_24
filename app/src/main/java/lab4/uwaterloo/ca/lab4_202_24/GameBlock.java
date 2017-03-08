@@ -15,8 +15,6 @@ public class GameBlock extends ImageView implements Movement {
     private int myCoordX;
     private int myCoordY;
 
-
-
     public GameBlock(Context myContext, int coordX, int coordY) {
         super(myContext);
         this.setImageResource(R.drawable.gameblock);
@@ -26,7 +24,6 @@ public class GameBlock extends ImageView implements Movement {
 
         setPixelX(coordX);
         setPixelY(coordY);
-
     }
 
     @Override

@@ -58,10 +58,21 @@ public class GameBlock extends ImageView implements Movement {
 
         animator = new Animator(this);
 
+
         relLayout.addView(this);
         relLayout.addView(blockTV);
     }
 
+
+    public int getBlockNum(){
+        return this.blockNum;
+
+    }
+
+    public void setBlockNum(int num){
+        this.blockNum = num;
+
+    }
     public void moveTo(int x, int y){
         this.animator.setTarget(x * blockLayoutIncrement, y * blockLayoutIncrement);
         this.bx = x;

@@ -35,6 +35,9 @@ public class Animator {
             Vy = 0;
         }
     }
+    public void move(GestureCallback.Direction direction){
+
+    }
 
     public void tick()
     /**

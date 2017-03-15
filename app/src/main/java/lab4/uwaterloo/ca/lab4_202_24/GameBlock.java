@@ -1,9 +1,15 @@
 package lab4.uwaterloo.ca.lab4_202_24;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import java.util.Random;
 
 import static android.R.attr.x;
+import static android.R.color.black;
 
 /**
  * Created by Alex on 2017-03-05.
@@ -19,7 +25,12 @@ public class GameBlock extends ImageView implements Movement {
     public int bx, by;
     private int blockLayoutIncrement = 243;     // coordinate pixel constant for moving one block up or down
     public Animator animator;
-    public GameBlock(Context myContext, int bx, int by) {
+    private int blockNum;
+    private Random ranNum;
+    public TextView blockTV;
+
+
+    public GameBlock(Context myContext, int bx, int by, RelativeLayout relLayout) {
 
         super(myContext);
         this.setImageResource(R.drawable.gameblock);
@@ -32,12 +43,36 @@ public class GameBlock extends ImageView implements Movement {
         this.myCoordX = blockLayoutIncrement*bx;
         this.myCoordY = blockLayoutIncrement*by;
 
+        blockTV = new TextView(myContext);
+        ranNum = new Random();
+        blockNum = 2^(ranNum.nextInt(3));
+        blockTV.setText(Integer.toString(blockNum));
+        blockTV.bringToFront();
+        blockTV.setTextColor(Color.BLACK);
+        blockTV.setTextSize(26);
+
+
+
         setPixelX(myCoordX);
         setPixelY(myCoordY);
 
         animator = new Animator(this);
+
+
+        relLayout.addView(this);
+        relLayout.addView(blockTV);
     }
 
+
+    public int getBlockNum(){
+        return this.blockNum;
+
+    }
+
+    public void setBlockNum(int num){
+        this.blockNum = num;
+
+    }
     public void moveTo(int x, int y){
         this.animator.setTarget(x * blockLayoutIncrement, y * blockLayoutIncrement);
         this.bx = x;

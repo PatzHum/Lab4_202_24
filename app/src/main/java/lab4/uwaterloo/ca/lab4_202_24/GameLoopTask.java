@@ -23,7 +23,7 @@ public class GameLoopTask extends TimerTask implements GestureCallback {
     RelativeLayout myRL;
     int blockLayoutIncrement = 243;     // coordinate pixel constant for moving one block up or down
     Direction CurrentDirection;
-
+    Vector<Animator> animators = new Vector<>();
     GestureCallback mainCallBack;
     GameBlock currentBlock;
     LinkedList<GameBlock> blockList = new LinkedList<>();
@@ -36,6 +36,8 @@ public class GameLoopTask extends TimerTask implements GestureCallback {
         myRL = myRL1;
         this.mainCallBack = mainCallBack;
         createBlock();          //instantiate block
+        animators.add(currentBlock.animator);
+
     }
     @Override
     public void onGestureDetect(Direction direction) {      //Stores current direction returned from FSM in Acceleration handler to Current Direction local variable
@@ -52,6 +54,7 @@ public class GameLoopTask extends TimerTask implements GestureCallback {
                     b.moveTo(b.bx, 0);
                 }
                 break;
+
             case DOWN:
                 for (GameBlock b : blockList){
                     b.moveTo(b.bx, 3);
@@ -93,8 +96,7 @@ public class GameLoopTask extends TimerTask implements GestureCallback {
     }
 
     private void createBlock(){
-        GameBlock newBlock = new GameBlock(myContext,(myRandomNum.nextInt(3)), (myRandomNum.nextInt(3)));//Instantiates new block at coordinates randomly genorated from 0 to 3, image scaling and pixel calculations offset in GameBlock.
-        myRL.addView(newBlock);     //add new block to relative layout
+        GameBlock newBlock = new GameBlock(myContext,(myRandomNum.nextInt(4)), (myRandomNum.nextInt(4)), myRL);//Instantiates new block at coordinates randomly genorated from 0 to 3, image scaling and pixel calculations offset in GameBlock.
         currentBlock = newBlock;
         blockList.add(newBlock);
 

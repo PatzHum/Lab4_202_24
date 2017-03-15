@@ -93,8 +93,8 @@ public class GameLoopTask extends TimerTask implements GestureCallback {
     }
 
     private void createBlock(){
-        GameBlock newBlock = new GameBlock(myContext,(myRandomNum.nextInt(3)), (myRandomNum.nextInt(3)));//Instantiates new block at coordinates randomly genorated from 0 to 3, image scaling and pixel calculations offset in GameBlock.
-        myRL.addView(newBlock);     //add new block to relative layout
+        GameBlock newBlock = new GameBlock(myContext,(myRandomNum.nextInt(4)), (myRandomNum.nextInt(4)), myRL);//Instantiates new block at coordinates randomly genorated from 0 to 3, image scaling and pixel calculations offset in GameBlock.
+        //myRL.addView(newBlock);     //add new block to relative layout
         currentBlock = newBlock;
         blockList.add(newBlock);
 
